@@ -61,3 +61,120 @@ v₄ = (vₓ + vᵧ - r·ω) / R
 ## Video Demonstration
 See `video_link.txt` for complete demonstration showing initialization, path planning, waypoint navigation, and completion statistics.
 
+
+# Manipulator Motion Control - Task 2
+
+**Team:** [Your Team Name] | **Institution:** HIT Delhi | **Date:** November 6, 2025
+
+## Overview
+Robotic manipulator sphere traces multiple predefined motion patterns with dynamic parameter control via Python API. Real-time validation ensures the tip follows the sphere accurately.
+
+## System Components
+- **Manipulator Sphere (Dummy):** Target object tracing motion patterns
+- **Tip:** End-effector that must follow the sphere
+- **Control Interface:** Python API for real-time parameter adjustment
+
+## Motion Modes
+
+### 1. Sine Wave
+- Linear X-axis motion (0 to r and back)
+- Sinusoidal Y-axis oscillation
+- **Parameters:** amplitude, frequency, r
+
+### 2. Square Pattern
+- Traces 4-sided square path
+- 4 equal segments (25% each per cycle)
+- **Parameter:** r (side length)
+
+### 3. Circle Pattern
+- Circular trajectory in X-Y plane
+- Completes full circle per cycle
+- **Parameter:** r (radius)
+
+### 4. Reach Point
+- Linear interpolation from start to end position
+- Smooth trajectory over 30 seconds
+- **Parameter:** endPos (target coordinates)
+
+## Key Parameters
+
+| Parameter | Default | Range | Unit |
+|-----------|---------|-------|------|
+| r | 0.1 | 0.05-0.5 | m |
+| amplitude | 0.1 | 0.01-0.3 | m |
+| frequency | 2 | 1-5 | Hz |
+| duration | 30 | - | seconds |
+
+## Control Interface (Python API)
+-- Set via Python:
+sim.setFloatProperty(scene_handle, "signal.r", 0.15)
+sim.setFloatProperty(scene_handle, "signal.amplitude", 0.12)
+sim.setFloatProperty(scene_handle, "signal.frequency", 3)
+sim.setStringProperty(scene_handle, "signal.motionMode", "circle")
+
+text
+
+## How to Run
+
+1. Load `Task2.ttt` in CoppeliaSim
+2. Click **Play**
+3. Select motion mode (default: circle)
+4. Monitor reachability check in console
+5. Adjust parameters in real-time via Python if needed
+
+## Reachability Validation
+- Checks distance between sphere and tip every step
+- **Threshold:** 0.05 m tolerance
+- **Action:** Pauses simulation if exceeded
+- **Message:** "Can't be reached"
+
+## Motion Cycle
+- **Duration:** 30 seconds per cycle
+- **Auto-repeat:** Restarts when ratio ≥ 1.0
+- **Progress:** Ratio = current_time / 30
+
+## Expected Output
+✓ Sphere traces smooth path
+✓ Tip follows within 0.05m tolerance
+✓ Mode switches in real-time
+✓ Cycles repeat automatically
+
+text
+
+## Code Structure
+- `sysCall_init()` - Initialize handles, positions, parameters
+- `sysCall_actuation()` - Main control loop, parameter updates, validation
+- `sine()` - Sine wave trajectory
+- `square()` - Square path generator
+- `circle()` - Circular motion
+- `reachPoint()` - Linear interpolation to target
+
+## Mathematical Formulations
+
+**Sine Wave:**
+x = x₀ + r × (2t/T)
+y = y₀ + A × sin(2πf × t)
+
+text
+
+**Circle:**
+x = x₀ - r(1 - cos(2πt))
+y = y₀ + r × sin(2πt)
+
+text
+
+**Square (each segment = T/4):**
+- Segment 1: Move +r in X
+- Segment 2: Move +r in Y
+- Segment 3: Move -r in X
+- Segment 4: Move -r in Y
+
+## Video Demonstration
+See `video_link.txt` for complete demonstration showing:
+- All 4 motion modes
+- Parameter adjustment via Python
+- Reachability validation
+- Cycle repetition
+
+---
+**Contact:** [Your Email/Contact Info]
