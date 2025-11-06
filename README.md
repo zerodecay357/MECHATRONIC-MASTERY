@@ -58,13 +58,7 @@ v₄ = (vₓ + vᵧ - r·ω) / R
 - `setOmniWheelVelocities()` - Inverse kinematics
 - `checkBoundaries()` - Arena edge protection
 
-## Video Demonstration
-See `video_link.txt` for complete demonstration showing initialization, path planning, waypoint navigation, and completion statistics.
-
-
 # Manipulator Motion Control - Task 2
-
-**Team:** [Your Team Name] | **Institution:** HIT Delhi | **Date:** November 6, 2025
 
 ## Overview
 Robotic manipulator sphere traces multiple predefined motion patterns with dynamic parameter control via Python API. Real-time validation ensures the tip follows the sphere accurately.
@@ -112,16 +106,6 @@ sim.setFloatProperty(scene_handle, "signal.amplitude", 0.12)
 sim.setFloatProperty(scene_handle, "signal.frequency", 3)
 sim.setStringProperty(scene_handle, "signal.motionMode", "circle")
 
-text
-
-## How to Run
-
-1. Load `Task2.ttt` in CoppeliaSim
-2. Click **Play**
-3. Select motion mode (default: circle)
-4. Monitor reachability check in console
-5. Adjust parameters in real-time via Python if needed
-
 ## Reachability Validation
 - Checks distance between sphere and tip every step
 - **Threshold:** 0.05 m tolerance
@@ -132,14 +116,6 @@ text
 - **Duration:** 30 seconds per cycle
 - **Auto-repeat:** Restarts when ratio ≥ 1.0
 - **Progress:** Ratio = current_time / 30
-
-## Expected Output
-✓ Sphere traces smooth path
-✓ Tip follows within 0.05m tolerance
-✓ Mode switches in real-time
-✓ Cycles repeat automatically
-
-text
 
 ## Code Structure
 - `sysCall_init()` - Initialize handles, positions, parameters
@@ -155,13 +131,9 @@ text
 x = x₀ + r × (2t/T)
 y = y₀ + A × sin(2πf × t)
 
-text
-
 **Circle:**
 x = x₀ - r(1 - cos(2πt))
 y = y₀ + r × sin(2πt)
-
-text
 
 **Square (each segment = T/4):**
 - Segment 1: Move +r in X
@@ -169,12 +141,3 @@ text
 - Segment 3: Move -r in X
 - Segment 4: Move -r in Y
 
-## Video Demonstration
-See `video_link.txt` for complete demonstration showing:
-- All 4 motion modes
-- Parameter adjustment via Python
-- Reachability validation
-- Cycle repetition
-
----
-**Contact:** [Your Email/Contact Info]
